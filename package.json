@@ -1,6 +1,6 @@
 {
   "name": "guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
@@ -15,7 +15,7 @@
     "test:watch": "jest --watch",
     "postinstall": "yarn run build",
     "postversion": "git push --tags && yarn publish . --non-interactive --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\"",
-    "release": "./scripts/publish.sh"
+    "release": "yarn build && yarn test && yarn version --patch --non-interactive"
   },
   "publishConfig": {
     "access": "public"
