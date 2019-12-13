@@ -1,6 +1,6 @@
 {
-  "name": "guard",
-  "version": "1.0.1",
+  "name": "@3fv/guard",
+  "version": "1.0.2",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
