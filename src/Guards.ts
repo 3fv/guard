@@ -1,9 +1,9 @@
 
-import _isNil = require('lodash/isNil')
-import _isObject = require('lodash/isObject')
-import _isString = require('lodash/isString')
-import _isNumber = require('lodash/isNumber')
-import _isFunction = require('lodash/isFunction')
+const _isNil = require('lodash/isNil')
+const _isObject = require('lodash/isObject')
+const _isString = require('lodash/isString')
+const _isNumber = require('lodash/isNumber')
+const _isFunction = require('lodash/isFunction')
 
 export type TNil = undefined|null
 
