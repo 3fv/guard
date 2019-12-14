@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
@@ -20,7 +20,7 @@
     "access": "public"
   },
   "files": [
-    "**/*.ts",
+    "**/*.d.ts",
     "**/*.js",
     "**/*.map",
     "package.json",
