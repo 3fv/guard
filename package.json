@@ -9,7 +9,7 @@
     "lodash.template": "^4.5.0"
   },
   "scripts": {
-    "build": "mkdir -p lib && cp package.json lib && tsc -b tsconfig.json",
+    "build": "if [ ! -e index.d.ts ];then;mkdir -p lib && cp package.json lib && tsc -b tsconfig.json; fi",
     "build:watch": "yarn run build -- --watch",
     "test": "jest",
     "test:watch": "jest --watch",
