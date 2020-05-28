@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
@@ -9,7 +9,7 @@
     "lodash.template": "^4.5.0"
   },
   "scripts": {
-    "build": "if [ ! -e index.d.ts ];then;mkdir -p lib && cp package.json lib && tsc -b tsconfig.json; fi",
+    "build": "./scripts/build.sh",
     "build:watch": "yarn run build -- --watch",
     "test": "jest",
     "test:watch": "jest --watch",
