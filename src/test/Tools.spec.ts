@@ -20,4 +20,8 @@ test(`getValue`,() => {
 test('guard',() => {
 	expect(throwErr).toThrow()
 	expect(() => guard(throwErr)).not.toThrow()
+	
+	const liftedGuard = guard.lift(throwErr)
+	expect(typeof liftedGuard).toBe("function")
+	expect(liftedGuard).not.toThrow()
 })

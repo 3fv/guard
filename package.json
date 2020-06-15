@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.0.18",
+  "version": "1.1.0",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,7 +13,8 @@
     "build:watch": "yarn run build -- --watch",
     "test": "jest",
     "test:watch": "jest --watch",
-    "postversion": "./scripts/release.sh $npm_package_version",
+    "preversion": "yarn test",
+    "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\"",
     "release": "yarn build && yarn test && yarn version --patch --non-interactive"
   },
   "publishConfig": {

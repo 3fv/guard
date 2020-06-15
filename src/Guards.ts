@@ -1,13 +1,17 @@
 
-const _isNil = require('lodash/isNil')
-const _isObject = require('lodash/isObject')
-const _isString = require('lodash/isString')
-const _isNumber = require('lodash/isNumber')
-const _isFunction = require('lodash/isFunction')
+function getFn(mod:any) {
+	return !mod ? undefined : typeof mod === "function" ? mod : mod.default
+}
 
-export type TNil = undefined|null
+const _isNil = getFn(require('lodash/isNil'))
+const _isObject = getFn(require('lodash/isObject'))
+const _isString = getFn(require('lodash/isString'))
+const _isNumber = getFn(require('lodash/isNumber'))
+const _isFunction = getFn(require('lodash/isFunction'))
 
-export function isNil(o:any):o is TNil {
+export type UndefinedOrNull = undefined|null
+
+export function isNil(o:any):o is UndefinedOrNull {
 	return _isNil(o)
 }
 

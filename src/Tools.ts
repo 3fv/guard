@@ -51,6 +51,14 @@ export function getValue<T>(
 }
 
 
+export type GuardFn = <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>)
+export type GuardTool = GuardFn & {
+	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => ((fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>))
+}
+
+
+
+
 /**
  * Execute a function guarded from exception
  *
@@ -58,9 +66,15 @@ export function getValue<T>(
  * @param localErrorHandler
  * @returns {(fn:()=>any)=>(fn:()=>any)=>any}
  */
-export function guard<T>(fn:() => T, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> {
+const guardFn:GuardFn = <T>(fn:() => T, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> => {
 	const value = getValue<T>(fn, undefined, localErrorHandler)
 	if (isPromise(value))
 		return value.then(() => undefined as void)
-
+	
 }
+
+export const guard: GuardTool = Object.assign(guardFn, {
+	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) =>
+		(fn:() => T, localErrorHandler?: GuardErrorHandler | null): (void | Promise<void>) =>
+			guardFn<T>(fn,localErrorHandler)
+})
