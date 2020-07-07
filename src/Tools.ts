@@ -10,7 +10,7 @@ export function setGuardErrorHandler(errorHandler:GuardErrorHandler | null = nul
 	globalErrorHandler = errorHandler
 }
 
-
+export type ReturnTypeOrAny<Fn extends () => any> = (ReturnType<Fn> extends never ? any : ReturnType<Fn>)
 
 
 /**
@@ -19,15 +19,15 @@ export function setGuardErrorHandler(errorHandler:GuardErrorHandler | null = nul
  *
  * @param fn
  * @param defaultValue
- * @returns {Promise<T | void> | any}
- * @param localErrorHandler
+ * @returns {any}
+ * @param errorHandler
  */
-export function getValue<T>(
-	fn:() => T,
-	defaultValue:Optional<T> = undefined,
-	localErrorHandler: Optional<ErrorHandler> = undefined
+export function getValue<Fn extends () => any, T extends ReturnTypeOrAny<Fn>>(
+	fn:Fn,
+	defaultValue: T = null,
+	errorHandler: Optional<ErrorHandler> = globalErrorHandler
 ):T extends Promise<infer T2> ? Promise<T2> : T {
-	const errorHandler = localErrorHandler || globalErrorHandler
+	
 	let result = null
 
 	try {
@@ -66,8 +66,8 @@ export type GuardTool = GuardFn & {
  * @param localErrorHandler
  * @returns {(fn:()=>any)=>(fn:()=>any)=>any}
  */
-const guardFn:GuardFn = <T>(fn:() => T, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> => {
-	const value = getValue<T>(fn, undefined, localErrorHandler)
+const guardFn:GuardFn = <Fn extends () => any, T extends ReturnTypeOrAny<Fn>>(fn:Fn, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> => {
+	const value = getValue<Fn,T>(fn, undefined, localErrorHandler)
 	if (isPromise(value))
 		return value.then(() => undefined as void)
 	
