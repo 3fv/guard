@@ -15,6 +15,8 @@ test(`getValue`,() => {
 	expect(errorHandled).toBeTruthy()
 	expect(getValue(throwErr)).toBeUndefined()
 	expect(getValue(() => 123,1)).toBe(123)
+	
+	expect(getValue(() => true, false)).toBe(true)
 })
 
 test('guard',() => {
