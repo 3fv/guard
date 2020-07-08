@@ -26,7 +26,7 @@ export function getValue<T>(
 	fn:() => T,
 	defaultValue: T = undefined,
 	errorHandler: ErrorHandler = globalErrorHandler
-):T extends Promise<infer T2> ? Promise<T2> : T {
+):ReturnType<typeof fn> extends Promise<infer T2> ? Promise<T2> : ReturnType<typeof fn> & (typeof defaultValue extends T ? typeof defaultValue : T) {
 	
 	let result = null
 
