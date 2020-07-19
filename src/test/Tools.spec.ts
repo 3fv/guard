@@ -11,6 +11,8 @@ test(`getValue`,() => {
 	setGuardErrorHandler(() => errorHandled = true)
 	expect(getValue(() => {
 		throw new Error('err')
+		// noinspection UnreachableCodeJS
+		return 0
 	}, 1)).toBe(1)
 	expect(errorHandled).toBeTruthy()
 	expect(getValue(throwErr)).toBeUndefined()

@@ -22,11 +22,11 @@ export type ReturnTypeOrAny<Fn extends () => any> = (ReturnType<Fn> extends neve
  * @returns {any}
  * @param errorHandler
  */
-export function getValue<T>(
-	fn:() => T,
+export function getValue<Fn extends () => any, T extends ReturnType<Fn> >(
+	fn:Fn,
 	defaultValue: T = undefined,
 	errorHandler: ErrorHandler = globalErrorHandler
-):ReturnType<typeof fn> extends Promise<infer T2> ? Promise<T2> : ReturnType<typeof fn> & (typeof defaultValue extends T ? typeof defaultValue : T) {
+):T extends Promise<infer T2> ? Promise<T2> : T {
 	
 	let result = null
 
@@ -51,7 +51,7 @@ export function getValue<T>(
 }
 
 
-export type GuardFn = <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>)
+export type GuardFn = <Fn extends () => any, T extends ReturnType<Fn> >(fn:Fn, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>)
 export type GuardTool = GuardFn & {
 	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => ((fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>))
 }
@@ -66,15 +66,15 @@ export type GuardTool = GuardFn & {
  * @param localErrorHandler
  * @returns {(fn:()=>any)=>(fn:()=>any)=>any}
  */
-const guardFn:GuardFn = <T>(fn:() => T, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> => {
-	const value = getValue<T>(fn, undefined, localErrorHandler)
+const guardFn:GuardFn = <Fn extends () => any, T extends ReturnType<Fn> >(fn:Fn, localErrorHandler: ((err: Error) => void) | null = null):void | Promise<void> => {
+	const value = getValue<Fn,T>(fn, undefined, localErrorHandler)
 	if (isPromise(value))
 		return value.then(() => undefined as void)
 	
 }
 
 export const guard: GuardTool = Object.assign(guardFn, {
-	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) =>
-		(fn:() => T, localErrorHandler?: GuardErrorHandler | null): (void | Promise<void>) =>
-			guardFn<T>(fn,localErrorHandler)
+	lift: <Fn extends () => any, T extends ReturnType<Fn> >(fn:Fn, localErrorHandler?: GuardErrorHandler | null) =>
+		(fn:Fn, localErrorHandler?: GuardErrorHandler | null): (void | Promise<void>) =>
+			guardFn<Fn,T>(fn,localErrorHandler)
 })
