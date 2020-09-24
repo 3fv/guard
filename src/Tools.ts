@@ -1,6 +1,6 @@
 
-import {isNil, isPromise} from "./Guards"
-import { ErrorHandler, Optional } from "./Types"
+import {isNil, isPromise} from "./guards/primitive"
+import { ErrorHandler, Optional } from "./types"
 
 export type GuardErrorHandler = (err:Error) => void
 

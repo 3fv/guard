@@ -9,7 +9,7 @@
     "lodash.template": "^4.5.0"
   },
   "scripts": {
-    "build": "./scripts/build.sh",
+    "build": "./scripts/build.fish",
     "build:watch": "yarn run build -- --watch",
     "test": "jest",
     "test:watch": "jest --watch",
