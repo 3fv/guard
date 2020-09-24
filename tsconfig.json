@@ -9,6 +9,7 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"declaration": true,
+		"esModuleInterop": true,
 		"emitDecoratorMetadata": true,
 		"jsx": "react",
 		"experimentalDecorators": true,
