@@ -10,6 +10,7 @@ fi
 git push --tags
 echo Publishing
 
+mkdir -p lib
 cp README.md package.json lib/
 #cd src
 #find ./ -name "*.ts" | xargs -IsrcFile cp srcFile ../lib
