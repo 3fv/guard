@@ -1,12 +1,15 @@
 #!/usr/bin/env fish
 
+set rootDir (dirname (dirname (realpath (status filename))))
+
 if ! test -e index.d.ts
-  if test -d lib && test "$NODE_ENV" = "production"
+  if test -d $rootDir/lib && test "$NODE_ENV" = "production"
     echo echo "$PWD/lib cleaned"
-    rm -Rf lib
+    rm -Rf $rootDir/lib
   end
-  mkdir -p lib
-  cp package.json lib
+  mkdir -p $rootDir/lib
+  cp package.json $rootDir/lib
+
   set tscArgs -b tsconfig.json $argv --preserveWatchOutput
 
   echo "Building with args: $tscArgs"
