@@ -1,4 +1,4 @@
-import { isFunction } from "./primitive"
+import { isFunction, isString } from "./primitive"
 
 export interface AssertOptions {
   logErrorsToConsole: boolean
@@ -30,7 +30,7 @@ export class AssertError extends Error {
 
 export function assert(
   test: (() => boolean) | boolean,
-  msg?: null | ((err?: Error) => string) | string | undefined,
+  msg?: null | ((err?: Error) => Error | string) | Error | string | undefined,
   overrideOptions: Partial<AssertOptions> = {}
 ): void | never {
   const options = {...assertOptions, ...overrideOptions}
@@ -49,9 +49,9 @@ export function assert(
   
   
   if (!result || !!error) {
-    const text = !msg ? (error?.message ?? "unknown") :
+    const errOut = !msg ? (error?.message ?? "unknown") :
       isFunction(msg) ? msg(error) :
         msg
-    throw new AssertError(text, error)
+    throw isString(errOut) ? new AssertError(errOut, error) : errOut
   }
 }

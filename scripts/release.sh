@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 NPM_VERSION=${1}
 
@@ -16,7 +16,7 @@ cp README.md package.json lib/
 #find ./ -name "*.ts" | xargs -IsrcFile cp srcFile ../lib
 
 pushd lib
-npm publish --tag latest
+npm publish --tag latest --registry=https://registry.npmjs.org
 cp package.json ../
 popd
 git push
