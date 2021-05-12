@@ -1,5 +1,6 @@
 import 'jest'
-import { isNil,isNumber,isString } from "../index"
+import { isArray,isNil,isNumber,isString } from "../index"
+
 
 test(`isNil`,() => {
 	expect(isNil(null)).toBeTruthy()
@@ -15,4 +16,10 @@ test(`isNumber`,() => {
 test(`isString`,() => {
 	expect(isString(1)).toBeFalsy()
 	expect(isString("1")).toBeTruthy()
+})
+
+test(`isArray`,() => {
+	expect(isArray(1)).toBeFalsy()
+	expect(isArray("1")).toBeFalsy()
+	expect(isArray(["1",2])).toBeTruthy()
 })
