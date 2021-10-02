@@ -2,7 +2,7 @@
 
 set rootDir (dirname (dirname (realpath (status filename))))
 
-if ! test -e index.d.ts
+if not test -e index.d.ts
   if test -d $rootDir/lib && test "$NODE_ENV" = "production"
     echo echo "$PWD/lib cleaned"
     rm -Rf $rootDir/lib

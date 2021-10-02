@@ -53,3 +53,9 @@ export function isSymbol(o:any):o is Symbol {
 export function isBoolean(o: any): o is boolean {
 	return typeof o === "boolean"
 }
+
+export type Primitive = boolean | string | number
+
+export function isPrimitive(o:any): o is Primitive {
+	return isBoolean(o) || isString(o) || isNumber(o)
+}
