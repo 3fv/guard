@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 NPM_VERSION=${1}
 
@@ -10,14 +10,14 @@ fi
 git push --tags
 echo Publishing
 
-mkdir -p lib
-cp README.md package.json lib/
+cat package.json | jq 'del(.scripts)' > lib/package.json
+cp README.md lib/
 #cd src
 #find ./ -name "*.ts" | xargs -IsrcFile cp srcFile ../lib
 
 pushd lib
-npm publish --tag latest --registry=https://registry.npmjs.org
-cp package.json ../
+yarn publish . --from-package --non-interactive --tag ${NPM_VERSION}
+#cp package.json ../
 popd
-git push
+git push 
 echo "Successfully released version ${NPM_VERSION}!"
