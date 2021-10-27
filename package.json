@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.4.27",
+  "version": "1.4.28",
   "description": "TypeScript guard suite",
   "main": "index.js",
   "types": "index.d.ts",
@@ -14,10 +14,12 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "preversion": "yarn build && yarn test",
-    "postversion": "./scripts/release.sh $npm_package_version && echo \"Successfully released version $npm_package_version!\"",
-    "release": "yarn build && yarn version --non-interactive",
-    "//release": "yarn publish --non-interactive",
-    "release:patch": "yarn release --patch "
+    "//postversion": "./scripts/release.sh $npm_package_version && echo \"Successfully released version $npm_package_version!\"",
+    "//release": "yarn build && yarn version --non-interactive",
+    "//release2": "yarn publish --non-interactive",
+    "//release:patch": "yarn release --patch ",
+    "postversion": "./scripts/release.sh latest",
+    "release": "yarn build  && yarn version --patch --non-interactive"
   },
   "publishConfig": {
     "access": "restricted"
