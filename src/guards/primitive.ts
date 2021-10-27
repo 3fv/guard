@@ -63,7 +63,11 @@ export type Primitive = boolean | string | number
 
 export type PrimitiveProducer = (...args: any[]) => Primitive
 
-export const Primitives = Array<PrimitiveProducer>(String, Number, Boolean)
+export const PrimitiveProducers = Array<PrimitiveProducer>(String, Number, Boolean)
+
+export function isPrimitiveProducer(o:any): o is PrimitiveProducer {
+	return PrimitiveProducers.includes(o)
+}
 
 export function isPrimitive(o:any): o is Primitive {
 	return isBoolean(o) || isString(o) || isNumber(o)

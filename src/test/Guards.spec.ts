@@ -1,5 +1,5 @@
 import 'jest'
-import { isArray,isNil,isNumber,isString } from "../index"
+import { isPrimitiveProducer,isArray,isNil,isNumber,isString } from "../index"
 
 
 test(`isNil`,() => {
@@ -17,6 +17,16 @@ test(`isString`,() => {
 	expect(isString(1)).toBeFalsy()
 	expect(isString("1")).toBeTruthy()
 })
+
+
+test(`isPrimitiveProducer`,() => {
+	expect(isPrimitiveProducer(Number)).toBeTruthy()
+	expect(isPrimitiveProducer(Boolean)).toBeTruthy()
+	expect(isPrimitiveProducer(String)).toBeTruthy()
+	expect(isPrimitiveProducer(Object)).toBeFalsy()
+	expect(isPrimitiveProducer("1")).toBeFalsy()
+})
+
 
 test(`isArray`,() => {
 	expect(isArray(1)).toBeFalsy()

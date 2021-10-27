@@ -20,7 +20,7 @@
     "release:patch": "yarn release --patch "
   },
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "files": [
     "**/*.d.ts",
