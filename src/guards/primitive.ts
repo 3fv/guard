@@ -3,6 +3,7 @@ import _isObject from 'lodash/isObject'
 import _isString from 'lodash/isString'
 import _isNumber from 'lodash/isNumber'
 import _isFunction from 'lodash/isFunction'
+import type { ClassConstructor } from "./types"
 
 export type UndefinedOrNull = undefined|null
 
@@ -54,7 +55,15 @@ export function isBoolean(o: any): o is boolean {
 	return typeof o === "boolean"
 }
 
+export function isDate(o: any): o is Date {
+	return o instanceof Date
+}
+
 export type Primitive = boolean | string | number
+
+export type PrimitiveProducer = (...args: any[]) => Primitive
+
+export const Primitives = Array<PrimitiveProducer>(String, Number, Boolean)
 
 export function isPrimitive(o:any): o is Primitive {
 	return isBoolean(o) || isString(o) || isNumber(o)
