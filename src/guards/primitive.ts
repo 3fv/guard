@@ -61,11 +61,11 @@ export function isDate(o: any): o is Date {
 
 export type Primitive = boolean | string | number
 
-export type PrimitiveProducer = (...args: any[]) => Primitive
+export type PrimitiveProducer<P extends Primitive = Primitive> = (...args: any[]) => P
 
 export const PrimitiveProducers = Array<PrimitiveProducer>(String, Number, Boolean)
 
-export function isPrimitiveProducer(o:any): o is PrimitiveProducer {
+export function isPrimitiveProducer<P extends Primitive = Primitive>(o:any): o is PrimitiveProducer<P> {
 	return PrimitiveProducers.includes(o)
 }
 
