@@ -9,8 +9,11 @@
     "lodash.template": "^4.5.0"
   },
   "scripts": {
-    "build": "./scripts/build.fish",
-    "build:watch": "yarn run build -- --watch",
+    "//build": "./scripts/build.fish",
+    "//build:watch": "yarn run build -- --watch",
+    "init": "mkdir -p lib && cat package.json | jq 'del(.scripts)' > lib/package.json",
+    "build": "yarn run init && tsc -b tsconfig.json",
+    "build:watch": "yarn run build && cd lib && yarn unlink;yarn link && cd .. && yarn run build --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "preversion": "yarn build && yarn test",
