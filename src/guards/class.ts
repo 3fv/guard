@@ -6,7 +6,7 @@
  * @param {any} value
  * @returns {boolean}
  */
-import type { ClassConstructor, TypeChecker } from "./types"
+import type { ClassConstructor, TypeGuard } from "./types"
 
 export function isNativeClass <T = any>(value:any): value is ClassConstructor<T> {
   return typeof value === 'function' && value.toString().indexOf('class') === 0
@@ -48,9 +48,9 @@ export function instanceOf<T extends {}, Ctor extends ClassConstructor<T>>(ctor:
   return createInstanceOfGuard<T,Ctor>(ctor)
 } 
 
-export function createGenericGuard<T>(tester: (val:any) => val is T):TypeChecker<T>
-export function createGenericGuard<T>(type:{new():T}, tester: (val:any) => val is T):TypeChecker<T>
+export function createGenericGuard<T>(tester: (val:any) => val is T):TypeGuard<T>
+export function createGenericGuard<T>(type:{new():T}, tester: (val:any) => val is T):TypeGuard<T>
 export function createGenericGuard<T>(typeOrTest: ({new():T} | ((val:any) => val is T)), tester?: (val:any) => val is T) {
-  return tester as TypeChecker<T>
+  return tester as TypeGuard<T>
 }
 

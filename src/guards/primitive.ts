@@ -3,9 +3,16 @@ import _isObject from 'lodash/isObject'
 import _isString from 'lodash/isString'
 import _isNumber from 'lodash/isNumber'
 import _isFunction from 'lodash/isFunction'
-import type { ClassConstructor } from "./types"
+import type {
+	TypeGuard,
+	TypeGuardExtras
+} from "./types"
+import { applyTypeGuardExtras } from "../Tools"
+
 
 export type UndefinedOrNull = undefined|null
+
+
 
 export function isNil(o:any):o is UndefinedOrNull {
 	return _isNil(o)
@@ -43,9 +50,9 @@ export function isNumber(o:any):o is number {
 	return !isNil(o) && _isNumber(o) && !isNaN(o)
 }
 
-export function isFunction(o:any):o is Function {
+export const isFunction = applyTypeGuardExtras<Function>(function isFunction(o:any):o is Function {
 	return !isNil(o) && _isFunction(o)
-}
+})
 
 export function isSymbol(o:any):o is Symbol {
 	return !isNil(o) && typeof o === 'symbol'
