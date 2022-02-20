@@ -3,11 +3,7 @@ import _isObject from 'lodash/isObject'
 import _isString from 'lodash/isString'
 import _isNumber from 'lodash/isNumber'
 import _isFunction from 'lodash/isFunction'
-import type {
-	TypeGuard,
-	TypeGuardExtras
-} from "./types"
-import { applyTypeGuardExtras } from "../Tools"
+import { applyTypeGuardExtras } from "../applyTypeGuardExtras"
 
 
 export type UndefinedOrNull = undefined|null

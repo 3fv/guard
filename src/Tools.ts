@@ -1,7 +1,5 @@
-
-import {isNil, isPromise} from "./guards/primitive"
-import { ErrorHandler, Optional } from "./types"
-import { TypeGuard, TypeGuardExtras } from "./guards"
+import { isNil, isPromise } from "./guards/primitive"
+import type { ErrorHandler } from "./types"
 
 export type GuardErrorHandler = (err:Error) => void
 
@@ -55,13 +53,6 @@ export function getValue<Fn extends () => any, T extends ReturnType<Fn> >(
 export type GuardFn = <Fn extends () => any, T extends ReturnType<Fn> >(fn:Fn, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>)
 export type GuardTool = GuardFn & {
 	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => ((fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>))
-}
-
-
-export function applyTypeGuardExtras<T>(fn: TypeGuard<T>): TypeGuardExtras<T> {
-	return Object.assign(fn, {
-		constant: (o:any) => () => fn(o)
-	})
 }
 
 
