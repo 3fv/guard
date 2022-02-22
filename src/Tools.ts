@@ -1,6 +1,5 @@
-
-import {isNil, isPromise} from "./Guards"
-import { ErrorHandler, Optional } from "./Types"
+import { isNil, isPromise } from "./guards/primitive"
+import type { ErrorHandler } from "./types"
 
 export type GuardErrorHandler = (err:Error) => void
 
@@ -55,7 +54,6 @@ export type GuardFn = <Fn extends () => any, T extends ReturnType<Fn> >(fn:Fn, l
 export type GuardTool = GuardFn & {
 	lift: <T>(fn:() => T, localErrorHandler?: GuardErrorHandler | null) => ((fn:() => T, localErrorHandler?: GuardErrorHandler | null) => (void | Promise<void>))
 }
-
 
 
 
