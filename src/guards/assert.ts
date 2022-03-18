@@ -28,11 +28,35 @@ export class AssertError extends Error {
 }
 
 
-export function assert(
+const assertLift:AssertLift = <T>(test: (value:T) => boolean, messageProvider: string | ((value: T) => string)) => {
+  return (nextValue: T) => {
+    const ok = test(nextValue)
+    if (!ok) {
+      const message = isFunction(messageProvider) ? messageProvider(nextValue) : messageProvider ?? "no message"
+      throw new AssertError(message)
+    }
+  }
+}
+
+export type AssertLift = <T>(test: (value:T) => boolean, message: string | ((value: T) => string)) =>
+  (nextValue: T) => void | never
+
+export interface Assert {
+  (
+    test: (() => boolean) | boolean,
+    msg?: null | ((err?: Error) => Error | string) | Error | string | undefined,
+    overrideOptions?: Partial<AssertOptions>
+  ): void | never
+  
+  lift: AssertLift
+}
+
+
+export const assert: Assert = Object.assign((
   test: (() => boolean) | boolean,
   msg?: null | ((err?: Error) => Error | string) | Error | string | undefined,
   overrideOptions: Partial<AssertOptions> = {}
-): void | never {
+): void | never => {
   const options = {...assertOptions, ...overrideOptions}
   let result: boolean = false
   let error: Error = undefined
@@ -46,12 +70,14 @@ export function assert(
     }
   }
   
-  
-  
   if (!result || !!error) {
     const errOut = !msg ? (error?.message ?? "unknown") :
       isFunction(msg) ? msg(error) :
         msg
     throw isString(errOut) ? new AssertError(errOut, error) : errOut
   }
-}
+}, {
+  lift: assertLift
+})
+
+
