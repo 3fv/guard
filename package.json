@@ -11,9 +11,11 @@
   "scripts": {
     "init": "mkdir -p lib && cat package.json | jq 'del(.scripts)' > lib/package.json",
     "build": "yarn run init && tsc -b tsconfig.json",
-    "build:watch": "yarn run build && cd lib && yarn unlink;yarn link && cd .. && yarn run build --watch",
+    "build:link": "yarn run init && cd lib && yarn unlink;yarn link && cd ..",
+    "build:watch": "run-s build build:link && tsc -b tsconfig.json --watch --preserveWatchOutput",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:dev": "run-s build && run-p test:watch build:watch",
     "preversion": "yarn build && yarn test",
     "postversion": "./scripts/release.sh latest",
     "release": "yarn version --patch --non-interactive"
@@ -50,15 +52,17 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@swc-node/core": "^1.8.2",
-    "@swc-node/jest": "^1.4.3",
-    "@swc-node/register": "^1.4.2",
-    "@types/jest": "^27.4.1",
-    "@types/lodash": "^4.14.180",
-    "@types/node": "^16.11.26",
-    "jest": "^27.5.1",
+    "@swc/core": "^1.7.6",
+    "@swc-node/core": "^1.13.3",
+    "@swc-node/jest": "^1.8.12",
+    "@swc-node/register": "^1.10.9",
+    "@types/jest": "^29.5.12",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^22.1.0",
+    "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.6.0",
-    "typescript": "^4.6.2"
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.4",
+    "typescript": "^5.5.4"
   }
 }

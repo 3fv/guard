@@ -1,5 +1,5 @@
 
-//const { defaults: tsjPreset } = require('ts-jest/presets');
+const { defaults: tsjPreset } = require('ts-jest/presets');
 
 module.exports = {
     verbose: true,
@@ -8,8 +8,8 @@ module.exports = {
       "node_modules"
     ],
     transform: {
-      ".*\\.ts": "@swc-node/jest"
-      //...tsjPreset.transform,
+      //".*\\.ts": "@swc-node/jest"
+      ...tsjPreset.transform,
       
     },
     moduleFileExtensions: [
