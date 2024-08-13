@@ -2,34 +2,9 @@
   "name": "@3fv/guard",
   "version": "1.4.35",
   "description": "TypeScript guard suite",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "resolutions": {
-    "lodash": "^4.17.21",
-    "lodash.template": "^4.5.0"
-  },
-  "scripts": {
-    "init": "mkdir -p lib && cat package.json | jq 'del(.scripts)' > lib/package.json",
-    "build": "yarn run init && tsc -b tsconfig.json",
-    "build:link": "yarn run init && cd lib && yarn unlink;yarn link && cd ..",
-    "build:watch": "run-s build build:link && tsc -b tsconfig.json --watch --preserveWatchOutput",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:dev": "run-s build && run-p test:watch build:watch",
-    "preversion": "yarn build && yarn test",
-    "postversion": "./scripts/release.sh latest",
-    "release": "yarn version --patch --non-interactive"
-  },
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "**/*.d.ts",
-    "**/*.js",
-    "**/*.map",
-    "package.json",
-    "README.md"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/3fv/guard.git"
@@ -48,6 +23,31 @@
     "url": "https://github.com/3fv/guard/issues"
   },
   "homepage": "https://github.com/3fv/guard#readme",
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/mjs/index.js",
+  "types": "./lib/mjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/mjs/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "build:link": "yarn run build && yarn unlink;yarn link",
+    "build:watch": "run-s build:link && yarn run build --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:dev": "run-s build && run-p test:watch build:watch",
+    "preversion": "yarn build && yarn test",
+    "postversion": "./scripts/release.sh latest",
+    "release": "yarn version --patch --non-interactive"
+  },
   "dependencies": {
     "lodash": "^4.17.21"
   },
@@ -63,6 +63,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.4",
+    "zx": "^8.1.4",
     "typescript": "^5.5.4"
   }
 }

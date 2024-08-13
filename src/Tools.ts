@@ -1,4 +1,4 @@
-import { isNil, isPromise } from "./guards/primitive"
+import { isNil, isPromise } from "./guards/primitive.js"
 import type { ErrorHandler } from "./types"
 
 export type GuardErrorHandler = (err:Error) => void

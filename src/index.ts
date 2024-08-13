@@ -1,4 +1,4 @@
-export * from './guards'
-export * from './transforms'
-export * from './Tools'
-export { applyTypeGuardExtras } from "./applyTypeGuardExtras"
+export * from './guards/index.js'
+export * from './transforms.js'
+export * from './Tools.js'
+export { applyTypeGuardExtras } from "./applyTypeGuardExtras.js"

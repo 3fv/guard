@@ -1,9 +1,9 @@
-import _isNil from 'lodash/isNil'
-import _isObject from 'lodash/isObject'
-import _isString from 'lodash/isString'
-import _isNumber from 'lodash/isNumber'
-import _isFunction from 'lodash/isFunction'
-import { applyTypeGuardExtras } from "../applyTypeGuardExtras"
+import _isNil from 'lodash/isNil.js'
+import _isObject from 'lodash/isObject.js'
+import _isString from 'lodash/isString.js'
+import _isNumber from 'lodash/isNumber.js'
+import _isFunction from 'lodash/isFunction.js'
+import { applyTypeGuardExtras } from "../applyTypeGuardExtras.js"
 
 
 export type UndefinedOrNull = undefined|null

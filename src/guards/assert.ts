@@ -1,4 +1,4 @@
-import { isFunction, isString } from "./primitive"
+import { isFunction, isString } from "./primitive.js"
 
 export interface AssertOptions {
   logErrorsToConsole: boolean
