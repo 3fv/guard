@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.4.36",
+  "version": "1.4.37",
   "description": "TypeScript guard suite",
   "publishConfig": {
     "access": "public"
