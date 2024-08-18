@@ -1,5 +1,5 @@
 import 'jest'
-import { guard,getValue, setGuardErrorHandler } from "../index"
+import { guard,getValue, setGuardErrorHandler } from "../index.js"
 
 
 function throwErr() {

@@ -1,5 +1,5 @@
 import 'jest'
-import { isPrimitiveProducer,isArray,isNil,isNumber,isString } from "../index"
+import { isPrimitiveProducer,isArray,isNil,isNumber,isString } from "../index.js"
 
 
 test(`isNil`,() => {

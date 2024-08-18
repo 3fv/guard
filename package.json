@@ -42,7 +42,7 @@
     "build:link": "yarn run build && yarn unlink;yarn link",
     "build:watch": "run-s build:link && yarn run build --watch",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll --no-cache",
     "test:dev": "run-s build && run-p test:watch build:watch",
     "preversion": "yarn build && yarn test",
     "postversion": "./scripts/release.sh latest",

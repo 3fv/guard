@@ -3,13 +3,17 @@ const { defaults: tsjPreset } = require('ts-jest/presets');
 
 module.exports = {
     verbose: true,
-    testRegex: "src\\/.*\\.spec\\.(ts|tsx)$",
+    testMatch: ["**/lib/cjs/**/*.spec.js"],
+    // testRegex: ".*lib\\/cjs\\/.*\\.spec\\.js$",
+
     moduleDirectories: [
-      "node_modules"
+      "node_modules",
+      
+      "lib/cjs"
     ],
     transform: {
       //".*\\.ts": "@swc-node/jest"
-      ...tsjPreset.transform,
+      // ...tsjPreset.transform,
       
     },
     moduleFileExtensions: [
