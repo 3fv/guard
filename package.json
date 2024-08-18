@@ -1,6 +1,6 @@
 {
   "name": "@3fv/guard",
-  "version": "1.4.35",
+  "version": "1.4.36",
   "description": "TypeScript guard suite",
   "publishConfig": {
     "access": "public"
@@ -52,10 +52,10 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@swc/core": "^1.7.6",
     "@swc-node/core": "^1.13.3",
     "@swc-node/jest": "^1.8.12",
     "@swc-node/register": "^1.10.9",
+    "@swc/core": "^1.7.6",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.1.0",
@@ -63,7 +63,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.4",
-    "zx": "^8.1.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "zx": "^8.1.4"
   }
 }
