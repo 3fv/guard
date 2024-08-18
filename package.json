@@ -45,7 +45,7 @@
     "test:watch": "jest --watchAll --no-cache",
     "test:dev": "run-s build && run-p test:watch build:watch",
     "preversion": "yarn build && yarn test",
-    "postversion": "./scripts/release.sh latest",
+    "postversion": "node ./scripts/release.mjs latest",
     "release": "yarn version --patch --non-interactive"
   },
   "dependencies": {

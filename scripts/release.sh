@@ -15,9 +15,8 @@ echo Publishing
 ./scripts/prepare.sh
 cp README.md lib/
 
-pushd lib
 yarn publish . --from-package --non-interactive --tag ${NPM_TAG}
-popd
+
 git push
 
 

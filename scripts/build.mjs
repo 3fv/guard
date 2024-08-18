@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 
-import { $, argv, fs as Fs, path as Path, echo, usePwsh, which } from "zx"
+import { $, argv, fs as Fs, path as Path, echo, usePwsh, which, os, useBash } from "zx"
 // import Path from "path"
 // import Fs from "fs"
 import Sh from "shelljs"
+import Os from "os"
 
 $.verbose = true
-usePwsh()
+const isLinux = /Linux/.test(Os.type())
+const isMac = /Darwin/.test(Os.type())
+const isWindows = /Win/.test(Os.type())
+if (isWindows)
+    usePwsh()
+else
+    useBash()
 
 const scriptDir = import.meta.dirname
 const rootDir = Path.resolve(scriptDir, "..")
