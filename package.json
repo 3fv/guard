@@ -34,7 +34,10 @@
   "exports": {
     ".": {
       "import": "./lib/mjs/index.js",
-      "require": "./lib/cjs/index.js"
+      "browser": "./lib/mjs/index.js",
+      "node": "./lib/cjs/index.js",
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/cjs/index.js"
     }
   },
   "scripts": {
