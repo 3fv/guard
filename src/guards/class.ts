@@ -32,8 +32,8 @@ export function isConventionalClass <T = any>(value:any): value is ClassConstruc
 }
 
 
-export function isClass<T = any>(value: any): value is ClassConstructor<T> {
-  return isNativeClass<T>(value) || isConventionalClass<T>(value)
+export function isClass<T = any>(value: any, includeConventional: boolean = true): value is ClassConstructor<T> {
+  return isNativeClass<T>(value) || (includeConventional && isConventionalClass<T>(value))
 }
 
 
