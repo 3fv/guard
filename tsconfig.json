@@ -1,16 +1,8 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"composite": true,
-		"baseUrl": "./"
-	},
-	"references": [
-		{ "path": "./tsconfig.mjs.json"},
-		{ "path": "./tsconfig.cjs.json"}
-	],
-	"files": [],
-	"include": [],
-	"exclude": [
-		"**/*.*"
-	]
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.esm.json" },
+    { "path": "./tsconfig.cjs.json" }
+  ]
 }

@@ -1,3 +1,4 @@
+*.tsbuildinfo
 lib
 dist
 yarn.lock

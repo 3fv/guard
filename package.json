@@ -29,15 +29,18 @@
     "README.md"
   ],
   "main": "./lib/cjs/index.js",
-  "module": "./lib/mjs/index.js",
-  "types": "./lib/mjs/index.d.ts",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/mjs/index.js",
-      "browser": "./lib/mjs/index.js",
-      "node": "./lib/cjs/index.js",
+      "import": "./lib/esm/index.js",
       "require": "./lib/cjs/index.js",
-      "default": "./lib/cjs/index.js"
+      "types": "./lib/esm/index.d.ts"
+    },
+    "./*": {
+      "import": "./lib/esm/*.js",
+      "require": "./lib/cjs/*.js",
+      "types": "./lib/esm/*.d.ts"
     }
   },
   "scripts": {
