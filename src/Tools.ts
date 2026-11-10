@@ -45,8 +45,8 @@ export function getValue<Fn extends () => any, T extends ReturnType<Fn> >(
 			errorHandler(err)
 	}
 
-	return isNil(result) ?
-		defaultValue : result
+	return (isNil(result) ?
+		defaultValue : result) as any
 }
 
 
