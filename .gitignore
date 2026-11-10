@@ -1,6 +1,8 @@
 *.tsbuildinfo
 lib
 dist
+# pnpm is the package manager and pnpm-lock.yaml is tracked;
+# lockfiles of other package managers are never committed.
 yarn.lock
 package-lock.json
 
@@ -92,3 +94,8 @@ fabric.properties
 /.idea/CustomInspectionsConfig.xml
 /.idea/dbnavigator.xml
 .DS_Store
+
+# Local agent tooling state
+.omc*
+.omx*
+.remember

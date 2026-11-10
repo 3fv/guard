@@ -1,6 +1,7 @@
 {
   "name": "@3fv/guard",
   "version": "1.4.39",
+  "packageManager": "pnpm@12.15.0",
   "description": "TypeScript guard suite",
   "publishConfig": {
     "access": "public"
@@ -25,7 +26,10 @@
   "homepage": "https://github.com/3fv/guard#readme",
   "files": [
     "lib",
+    "!lib/*/test",
+    "!lib/**/*.tsbuildinfo",
     "src",
+    "!src/test",
     "README.md"
   ],
   "main": "./lib/cjs/index.js",
@@ -45,14 +49,12 @@
   },
   "scripts": {
     "build": "node ./scripts/build.mjs",
-    "build:link": "yarn run build && yarn unlink;yarn link",
-    "build:watch": "run-s build:link && yarn run build --watch",
+    "build:watch": "pnpm run build --watch",
     "test": "jest",
     "test:watch": "jest --watchAll --no-cache",
     "test:dev": "run-s build && run-p test:watch build:watch",
-    "preversion": "yarn build && yarn test",
-    "postversion": "node ./scripts/release.mjs latest",
-    "release": "yarn version --patch --non-interactive"
+    "preversion": "pnpm build && pnpm test",
+    "release": "gh workflow run release.yml --ref master -f bump=patch"
   },
   "dependencies": {
     "lodash": "^4.17.21"
