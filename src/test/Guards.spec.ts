@@ -1,11 +1,23 @@
 import 'jest'
-import { isPrimitiveProducer,isArray,isNil,isNumber,isString } from "../index.js"
+import { isPrimitiveProducer,isArray,isDefined,isNil,isNumber,isString } from "../index.js"
 
 
 test(`isNil`,() => {
 	expect(isNil(null)).toBeTruthy()
 	expect(isNil(undefined)).toBeTruthy()
 	expect(isNil(1)).toBeFalsy()
+})
+
+test(`isDefined`,() => {
+	expect(isDefined(null)).toBeFalsy()
+	expect(isDefined(undefined)).toBeFalsy()
+	expect(isDefined(0)).toBeTruthy()
+	expect(isDefined("")).toBeTruthy()
+	expect(isDefined(false)).toBeTruthy()
+
+	const values: Array<number | null | undefined> = [1, null, 2, undefined]
+	const defined: number[] = values.filter(isDefined)
+	expect(defined).toEqual([1, 2])
 })
 
 test(`isNumber`,() => {

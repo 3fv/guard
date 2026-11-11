@@ -19,9 +19,7 @@ export function isNil(o:any):o is UndefinedOrNull {
  *
  * @param o
  */
-export function isDefined<T>(o:any):o is Exclude<T, UndefinedOrNull>
-export function isDefined(o:any):o is Exclude<any,UndefinedOrNull>
-export function isDefined(o:any) {
+export function isDefined<T>(o: T): o is NonNullable<T> {
 	return !isNil(o)
 }
 
